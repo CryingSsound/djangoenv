@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import PostForm
 from .models import Post
+from rest_framework import viewsets
+from .serializers import PostSerializer
 
 # Create your views here.
 def post_list(request):
@@ -46,3 +48,7 @@ def post_edit(request, pk):
 
 def js_test(request):
     return render(request, 'blog/js_test.html', {})
+
+class IntruderImage(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
